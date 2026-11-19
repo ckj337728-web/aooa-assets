@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <script>window.PUBLIC_LIBRARY=true;</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#202322">
+  <title>AOOA素材库</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <div id="shell">
+    <div id="scrim" hidden></div>
+    <aside class="sidebar" id="sidebar" aria-label="素材库导航">
+      <div class="logo-row">
+        <div class="brand-symbol" aria-hidden="true"><i></i><b></b></div>
+        <strong>AOOA素材库</strong>
+        <button id="close-nav" class="icon-button mobile-only" aria-label="关闭导航" data-icon="x"></button>
+      </div>
+      <nav class="side-scroll" aria-label="按车型浏览">
+        <h2 class="side-heading">素材视图</h2><div id="library-nav"></div>
+        <h2 class="side-heading section-heading">车型目录 <span id="model-count"></span></h2>
+        <div id="model-nav"></div>
+      </nav>
+      <div class="side-foot"><span class="status-dot"></span><span id="db-status">正在读取素材库</span></div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="open-nav" class="icon-button mobile-only" data-icon="menu" aria-label="打开车型导航"></button>
+          <span class="crumb-icon" data-icon="archive"></span><span class="crumb-root">素材工作台</span><span class="crumb-slash">/</span><strong>素材浏览</strong>
+        </div>
+        <div class="public-download-note" data-public-only><span data-icon="download"></span>免费下载 · 无需登录</div>
+        <div class="header-actions" data-local-only>
+          <button class="button quiet" id="scan"><span data-icon="refresh"></span><span>重新扫描</span></button>
+          <button class="button dark" id="new-category"><span data-icon="folder-plus"></span><span>新建类目</span></button>
+        </div>
+      </header>
+      <main>
+        <section class="hero" id="hero" aria-labelledby="page-title">
+          <div class="hero-photo"></div>
+          <div class="hero-content"><h1 id="page-title">全部素材</h1><div class="hero-stats" id="hero-stats">正在读取素材…</div></div>
+        </section>
+        <div id="error-banner" role="alert" hidden></div>
+        <section class="browse" aria-label="素材检索">
+          <div class="search-line">
+            <label class="search-box"><span data-icon="search"></span><input id="query" aria-label="搜索车型、年份、颜色或文件名" placeholder="搜索车型、年份、颜色或文件名…" autocomplete="off"><button type="button" id="clear-search" class="search-clear" data-icon="x" aria-label="清空搜索" hidden></button><kbd id="search-shortcut">/</kbd></label>
+            <label class="select-wrap format-select"><span data-icon="sliders"></span><select id="format" aria-label="文件格式"><option value="">全部格式</option></select><span data-icon="chevron-down"></span></label>
+          </div>
+          <div class="category-line"><span class="filter-label">素材类目</span><div id="category-filters" class="chips"></div></div>
+        </section>
+        <section aria-labelledby="results-title">
+          <div class="results-bar" id="results-bar">
+            <h2 id="results-title">素材列表 <span id="result-count" class="count-pill">0</span></h2>
+            <div class="result-actions">
+              <label class="sort-wrap"><span data-icon="sort"></span><select id="sort" aria-label="素材排序"><option value="gallery">综合排序</option><option value="name">文件名称</option><option value="recent">最近修改</option></select><span data-icon="chevron-down"></span></label>
+              <div class="view-toggle"><button id="grid-view" aria-label="网格视图" title="网格视图" data-icon="grid" aria-pressed="true"></button><button id="list-view" aria-label="列表视图" title="列表视图" data-icon="list" aria-pressed="false"></button></div>
+              <button class="button select-mode" id="select-mode" data-local-only><span data-icon="check-square"></span><span>批量选择</span></button>
+            </div>
+          </div>
+          <div id="batch-bar" data-local-only hidden><label><input type="checkbox" id="select-page"> 选中本页</label><button type="button" class="all-results" id="select-all-results">选中全部结果</button><strong id="selected-count"></strong><div><button class="button quiet" id="cancel-selection">取消</button><button class="button dark" id="classify-selection">调整归属</button></div></div>
+          <div id="assets" class="assets" aria-busy="true"></div>
+          <div id="empty" class="empty" hidden><span data-icon="search"></span><h3>没有找到素材</h3><p>试试其他车型名称、关键词或类目。</p><button id="clear-filters" class="button">查看全部素材</button></div>
+          <div id="pagination" class="pagination"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <dialog id="editor" class="modal"><div id="editor-content"></div></dialog>
+  <div id="toast" role="status" hidden></div>
+</body>
+</html>
